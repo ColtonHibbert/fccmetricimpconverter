@@ -9,6 +9,11 @@ var apiRoutes         = require('./routes/api.js');
 var fccTestingRoutes  = require('./routes/fcctesting.js');
 var runner            = require('./test-runner');
 
+const helmet =  require('helmet');
+helmet.noSniff();
+helmet.xssFilter();
+
+
 var app = express();
 
 app.use('/public', express.static(process.cwd() + '/public'));
