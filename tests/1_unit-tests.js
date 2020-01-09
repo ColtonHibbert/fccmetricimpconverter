@@ -20,7 +20,7 @@ suite('Unit Tests', function(){
       var input = '32L';
       assert.equal(convertHandler.getNum(input),32);
       done();
-    });
+    }); 
     
     test('Decimal Input', function(done) {
       

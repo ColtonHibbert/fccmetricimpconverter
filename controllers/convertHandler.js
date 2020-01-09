@@ -19,6 +19,9 @@ function ConvertHandler() {
       console.log('getnum is returning', num)
       return num
     }  
+    if(typeof num === "undefined") {
+      return 1
+    }
     return 'invalid number'   
   };
   
@@ -118,9 +121,8 @@ function ConvertHandler() {
       initSpelled: spellUnit(initUnit),
       returnSpelled: spellUnit(returnUnit)
     }
-
+    //console.log(spelledOutUnits)
     return spelledOutUnits;
-    
   };
   
   this.convert = function(initNum, initUnit) {
@@ -162,9 +164,10 @@ function ConvertHandler() {
     }
   };
   
-  this.getString = function(initNum, initUnit, returnNum, spelledUnit) {
-    
-    return `${initNum} ${spelledUnit.initSpelled} converts to ${returnNum} ${spelledUnit.returnSpelled}`
+  this.getString = function(initNum, initUnit, returnNum, returnUnit, spelledUnit) {
+    const returnNumTo5thDecimal = Math.round(returnNum * 100000)/100000;
+    console.log(spelledUnit)
+    return `${initNum} ${spelledUnit.initSpelled} converts to ${returnNumTo5thDecimal} ${spelledUnit.returnSpelled}`
   };
   
 }
