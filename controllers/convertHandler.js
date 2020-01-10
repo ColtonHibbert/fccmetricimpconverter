@@ -23,10 +23,15 @@ function ConvertHandler() {
   };
   
   this.getUnit = function(input) {
-    const valRegex = /gal|l|mi|km|lbs|kg/i
+    const valRegex = /gal|lbs|mi|km|l|kg/i
     const valMatch = input.match(valRegex)
     console.log(valMatch)
-    const val = valMatch[0]
+    const val = (() => {
+      if(valMatch) {
+        return  valMatch[0]
+      }
+    })()
+     
     if(val) {
       console.log('getunit val returning', val)
       return val
@@ -36,19 +41,90 @@ function ConvertHandler() {
   };
   
   this.getReturnUnit = function(initUnit) {
-    var result;
+    const galRegex = /gal/i;
+    const lbsRegex = /lbs/i;
+    const kgRegex = /kg/i;
+    const miRegex = /mi/i;
+    const kmRegex = /km/i;
+    const lRegex = /l/i;
+
+    const checkRegex = (reg) => {
+      if(initUnit.match(reg)) {
+        return initUnit.match(reg)[0]
+      }
+    }
     
-    return result;
+    const unit = (() => {
+      if(initUnit === checkRegex(galRegex)) {
+        return 'l'
+      }
+      if(initUnit === checkRegex(lRegex)){
+        return 'gal';
+      }
+      if(initUnit === checkRegex(lbsRegex)) {
+        return 'kg';
+      }
+      if(initUnit === checkRegex(kgRegex)) {
+        return  'lbs';
+      }
+      if(initUnit === checkRegex(miRegex)) {
+        return 'km';
+      }
+      if(initUnit === checkRegex(kmRegex)) {
+        return 'mi';
+      }
+    })()
+
+    return unit
   };
 
-  this.spellOutUnit = function(unit) {
-    var result;
+  this.spellOutUnit = function(initUnit, returnUnit) {
+    const galRegex = /gal/i;
+    const lbsRegex = /lbs/i;
+    const kgRegex = /kg/i;
+    const miRegex = /mi/i;
+    const kmRegex = /km/i;
+    const lRegex = /l/i;
+
+    const checkRegex = (unit , reg) => {
+      if(unit.match(reg)) {
+        return unit.match(reg)[0]
+      }
+    }
     
-    return result;
+    const spellUnit = (unit) => {
+      if(unit === checkRegex(unit, galRegex)) {
+        return 'gallons'
+      }
+      if(unit === checkRegex(unit, lRegex)){
+        return 'liters';
+      }
+      if(unit === checkRegex(unit, lbsRegex)) {
+        return 'pounds';
+      }
+      if(unit === checkRegex(unit, kgRegex)) {
+        return  'kilograms';
+      }
+      if(unit === checkRegex(unit, miRegex)) {
+        return 'miles';
+      }
+      if(unit === checkRegex(unit, kmRegex)) {
+        return 'kilometers';
+      }
+    }
+
+
+    const spelledOutUnits = {
+      initSpelled: spellUnit(initUnit),
+      returnSpelled: spellUnit(returnUnit)
+    }
+
+    return spelledOutUnits;
+    
   };
   
   this.convert = function(initNum, initUnit) {
-   
+    
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.609344;
@@ -60,7 +136,6 @@ function ConvertHandler() {
     const miRegex = /mi/i;
     const kmRegex = /km/i;
 
-    const checkMi = initUnit.match(miRegex)
     const checkRegex = (reg) => {
       if(initUnit.match(reg)) {
         return initUnit.match(reg)[0]
@@ -87,10 +162,9 @@ function ConvertHandler() {
     }
   };
   
-  this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    var result;
+  this.getString = function(initNum, initUnit, returnNum, spelledUnit) {
     
-    return result;
+    return `${initNum} ${spelledUnit.initSpelled} converts to ${returnNum} ${spelledUnit.returnSpelled}`
   };
   
 }
