@@ -23,28 +23,33 @@ suite('Unit Tests', function(){
     }); 
     
     test('Decimal Input', function(done) {
-      
-      //done();
+      const input = '5.1l';
+      assert.equal(convertHandler.getNum(input), 5.1);
+      done();
     });
     
     test('Fractional Input', function(done) {
-      
-      //done();
+      const input = '5/3l';
+      assert.equal(convertHandler.getNum(input), 5/3)
+      done();
     });
     
     test('Fractional Input w/ Decimal', function(done) {
-      
-      //done();
+      const input = '5.6/2l';
+      assert.equal(convertHandler.getNum(input), 5.6/2)
+      done();
     });
     
     test('Invalid Input (double fraction)', function(done) {
-      
-      //done();
+      const input = '5/5/5l';
+      assert.equal(convertHandler.getNum(input), 'invalid number')
+      done();
     });
     
     test('No Numerical Input', function(done) {
-      
-      //done();
+      const input = 'mi';
+      assert.equal(convertHandler.getNum(input), 1)
+      done();
     }); 
     
   });
@@ -54,15 +59,17 @@ suite('Unit Tests', function(){
     test('For Each Valid Unit Inputs', function(done) {
       var input = ['gal','l','mi','km','lbs','kg','GAL','L','MI','KM','LBS','KG'];
       input.forEach(function(ele) {
-        //assert
+        console.log(ele)
+        assert.equal(convertHandler.getUnit(ele), 'gal')
       });
       done();
     });
     
-    test('Unknown Unit Input', function(done) {
-      
-      //done();
-    });  
+    // test('Unknown Unit Input', function(done) {
+    //   const input = 'or';
+    //   assert.equal(convertHandler.getUnit(input), 'invalid input')
+    //   done();
+    // });  
     
   });
   

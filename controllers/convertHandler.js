@@ -10,9 +10,21 @@ function ConvertHandler() {
   
   this.getNum = function(input) {
     console.log(input)
-    const numRegex = /^[0-9.\/]{0,}/ig
+    const numRegex = /^[0-9./]{0,}/;
     const numMatch = input.match(numRegex)
-    console.log(numMatch, 'nummatch')
+    
+      console.log(numMatch, 'nummatch')
+    if (numMatch) {
+      const doubleFractionRegex = /\//g;
+      const checkDoubleFraction = numMatch[0].match(doubleFractionRegex);
+      console.log(checkDoubleFraction, 'CHECKDOUBLEFRACTION')
+      if(checkDoubleFraction) {
+        if(checkDoubleFraction.length > 1) {
+          return 'invalid number'
+        }
+      }
+    }
+    
     const num = eval(numMatch[0]);
     console.log('num', num)
     if(typeof num === "number"){
