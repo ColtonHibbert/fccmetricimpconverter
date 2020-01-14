@@ -157,29 +157,29 @@ function ConvertHandler() {
     }
     //console.log(initUnit.match(galRegex), "match galregex")
     if(initUnit === checkRegex(galRegex)) {
-      return initNum * galToL;
+      return Math.round((initNum * galToL) * 100000) / 100000
     }
     if(initUnit === checkRegex(lRegex)){
-      return initNum / galToL;
+      return  Math.round(( initNum / galToL) * 100000) / 100000
     }
     if(initUnit === checkRegex(lbsRegex)) {
-      return initNum * lbsToKg;
+      return  Math.round(( initNum * lbsToKg) * 100000) / 100000
     }
     if(initUnit === checkRegex(kgRegex)) {
-      return initNum / lbsToKg;
+      return  Math.round((initNum / lbsToKg) * 100000) / 100000
     }
     if(initUnit === checkRegex(miRegex)) {
-      return initNum * miToKm;
+      return  Math.round((initNum * miToKm) * 100000) / 100000
     }
     if(initUnit === checkRegex(kmRegex)) {
-      return initNum / miToKm;
+      return  Math.round((initNum / miToKm) * 100000) / 100000
     }
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit, spelledUnit) {
-    const returnNumTo5thDecimal = Math.round(returnNum * 100000)/100000;
+    
     console.log(spelledUnit)
-    return `${initNum} ${spelledUnit.initSpelled} converts to ${returnNumTo5thDecimal} ${spelledUnit.returnSpelled}`
+    return `${initNum} ${spelledUnit.initSpelled} converts to ${returnNum} ${spelledUnit.returnSpelled}`
   };
   
 }
