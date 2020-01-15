@@ -102,8 +102,10 @@ function ConvertHandler() {
     const lRegex = /l/i;
 
     const checkRegex = (unit , reg) => {
-      if(unit.match(reg)) {
-        return unit.match(reg)[0]
+      if(unit) {
+        if(unit.match(reg)) {
+          return unit.match(reg)[0]
+        }
       }
     }
     

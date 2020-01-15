@@ -92,7 +92,10 @@ suite('Unit Tests', function(){
       const input = ['gal','lbs','mi','km','l','kg'];
       const expect = ['gallons',  'pounds', 'miles', 'kilometers', 'liters', 'kilograms']
       input.forEach(function (ele, i) {
-        assert.equal(convertHandler.spellOutUnit(ele), expect[i])
+        const spelledObject = convertHandler.spellOutUnit(ele);
+        const initSpelled = spelledObject.initSpelled;
+        console.log(initSpelled, 'initspelled in now', expect[i], 'expect i')
+        assert.equal(initSpelled, expect[i])
       })
       //see above example for hint
       done();
